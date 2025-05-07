@@ -46,31 +46,60 @@ class LLMFactoryHelper {
 
   static BaseLLMClient createFromModel(llm_model.Model currentModel) {
     try {
-      final setting = ProviderManager.settingsProvider.apiSettings.firstWhere(
-          (element) => element.providerId == currentModel.providerId);
+      Logger.root.severe('디버그 - currentModel: ${currentModel.toJson()}');
+      
+      final apiSettings = ProviderManager.settingsProvider.apiSettings;
+      Logger.root.severe('디버그 - 사용 가능한 API 설정: ${apiSettings.map((s) => "${s.providerId}:${s.apiEndpoint}").join(", ")}');
+      
+      final setting = apiSettings.firstWhere(
+          (element) => element.providerId == currentModel.providerId,
+          orElse: () {
+            Logger.root.severe('디버그 - providerId로 일치하는 설정을 찾을 수 없음: ${currentModel.providerId}');
+            return apiSettings.firstWhere(
+              (element) => element.providerName == currentModel.providerName,
+              orElse: () {
+                Logger.root.severe('디버그 - providerName으로도 일치하는 설정을 찾을 수 없음: ${currentModel.providerName}');
+                return LLMProviderSetting(
+                  apiKey: 'seahorse', 
+                  apiEndpoint: 'http://114.110.134.73:8085/v1', 
+                  providerId: 'openai',
+                  apiStyle: 'openai'
+                );
+              }
+            );
+          });
 
       // 获取配置信息
       final apiKey = setting.apiKey;
       final baseUrl = setting.apiEndpoint;
 
-      Logger.root.fine(
-          'Using API Key: ${apiKey.isEmpty ? 'empty' : apiKey.substring(0, 10)}***** for provider: ${currentModel.providerId} model: $currentModel');
+      Logger.root.severe(
+          '디버그 - 선택된 설정: providerId=${setting.providerId}, baseUrl=${baseUrl}, apiStyle=${setting.apiStyle}');
 
       var provider = LLMFactoryHelper.providerMap[currentModel.providerId];
+      if (provider == null) {
+        Logger.root.severe('디버그 - providerId에 해당하는 프로바이더를 찾을 수 없음, apiStyle 사용: ${currentModel.apiStyle}');
+      }
 
       provider ??= LLMProvider.values.byName(currentModel.apiStyle);
 
+      Logger.root.severe('디버그 - 최종 선택된 프로바이더: $provider, apiKey=${apiKey}, baseUrl=${baseUrl}');
+
       // 创建 LLM 客户端
       return LLMFactory.create(provider, apiKey: apiKey, baseUrl: baseUrl);
-    } catch (e) {
+    } catch (e, stackTrace) {
       // 如果找不到匹配的提供商，使用默认的OpenAI
-      Logger.root
-          .warning('未找到匹配的提供商配置: ${currentModel.providerId}，使用默认OpenAI配置');
+      Logger.root.severe('디버그 - 예외 발생: $e');
+      Logger.root.severe('디버그 - 스택 트레이스: $stackTrace');
+      Logger.root.warning('未找到匹配的提供商配置: ${currentModel.providerId}，使用默认OpenAI配置');
 
       var openAISetting = ProviderManager.settingsProvider.apiSettings
           .firstWhere((element) => element.providerId == "openai",
               orElse: () => LLMProviderSetting(
-                  apiKey: '', apiEndpoint: '', providerId: 'openai'));
+                  apiKey: 'seahorse', 
+                  apiEndpoint: 'http://114.110.134.73:8085/v1', 
+                  providerId: 'openai',
+                  apiStyle: 'openai'));
 
       return OpenAIClient(
           apiKey: openAISetting.apiKey, baseUrl: openAISetting.apiEndpoint);

@@ -14,7 +14,7 @@ class OpenAIClient extends BaseLLMClient {
     required this.apiKey,
     String? baseUrl,
   })  : baseUrl = (baseUrl == null || baseUrl.isEmpty)
-            ? 'https://api.openai.com/v1'
+            ? 'http://114.110.134.73:8085/v1'
             : baseUrl,
         _headers = {
           'Content-Type': 'application/json; charset=utf-8',

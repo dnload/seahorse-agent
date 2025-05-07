@@ -935,9 +935,6 @@ class _KeysSettingsState extends State<KeysSettings> {
               color: Theme.of(context).colorScheme.onSurface,
             ),
             validator: (value) {
-              if (value != null && value.isNotEmpty && value.length < 10) {
-                return l10n.apiKeyValidation;
-              }
               return null;
             },
           ),
