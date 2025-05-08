@@ -233,10 +233,8 @@ class _KeysSettingsState extends State<KeysSettings> {
                         ? CupertinoIcons.chevron_up
                         : CupertinoIcons.chevron_down,
                     size: 18,
-                    color: Theme.of(context)
-                        .colorScheme
-                        .onSurface
-                        .withOpacity(0.6),
+                    color:
+                        Theme.of(context).colorScheme.onSurface.withAlpha(153),
                   ),
                 ],
               ),
@@ -293,7 +291,7 @@ class _KeysSettingsState extends State<KeysSettings> {
         style: ElevatedButton.styleFrom(
           backgroundColor: _hasChanges
               ? Theme.of(context).colorScheme.primary
-              : Theme.of(context).colorScheme.surfaceVariant,
+              : Theme.of(context).colorScheme.surfaceContainerHighest,
           foregroundColor: _hasChanges
               ? Theme.of(context).colorScheme.onPrimary
               : Theme.of(context).colorScheme.onSurfaceVariant,
@@ -593,8 +591,7 @@ class _KeysSettingsState extends State<KeysSettings> {
       visualDensity: VisualDensity.compact,
       contentPadding: const EdgeInsets.symmetric(horizontal: 12.0, vertical: 0),
       selected: isSelected,
-      selectedTileColor:
-          Theme.of(context).colorScheme.primary.withOpacity(0.12),
+      selectedTileColor: Theme.of(context).colorScheme.primary.withAlpha(31),
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(8),
       ),
@@ -1006,8 +1003,8 @@ class _KeysSettingsState extends State<KeysSettings> {
                       LLMProvider.values.byName(controllers.apiStyleController);
 
                   final llm = LLMFactory.create(provider,
-                      apiKey: controllers.keyController!.text,
-                      baseUrl: controllers.endpointController!.text);
+                      apiKey: controllers.keyController.text,
+                      baseUrl: controllers.endpointController.text);
 
                   final models = await llm.models();
                   setState(() {
@@ -1042,8 +1039,8 @@ class _KeysSettingsState extends State<KeysSettings> {
                       LLMProvider.values.byName(controllers.apiStyleController);
 
                   final llm = LLMFactory.create(provider,
-                      apiKey: controllers.keyController!.text,
-                      baseUrl: controllers.endpointController!.text);
+                      apiKey: controllers.keyController.text,
+                      baseUrl: controllers.endpointController.text);
 
                   final models = await llm.models();
                   setState(() {
