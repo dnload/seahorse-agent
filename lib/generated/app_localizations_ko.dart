@@ -464,4 +464,10 @@ class AppLocalizationsKo extends AppLocalizations {
 
   @override
   String get reset => '초기화';
+
+  @override
+  String get editTitle => '제목 수정';
+
+  @override
+  String get enterNewTitle => '새 제목을 입력하세요';
 }

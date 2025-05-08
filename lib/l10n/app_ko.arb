@@ -145,5 +145,7 @@
   "apiUrl": "API URL",
   "selectApiStyle": "API 스타일 선택",
   "serverType": "서버 유형",
-  "reset": "초기화"
+  "reset": "초기화",
+  "editTitle": "제목 수정",
+  "enterNewTitle": "새 제목을 입력하세요"
 }

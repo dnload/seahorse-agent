@@ -464,4 +464,10 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get reset => '重置';
+
+  @override
+  String get editTitle => '编辑标题';
+
+  @override
+  String get enterNewTitle => '请输入新标题';
 }

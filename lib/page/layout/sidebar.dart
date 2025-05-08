@@ -7,6 +7,7 @@ import 'package:chatmcp/utils/color.dart';
 import 'package:chatmcp/generated/app_localizations.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:chatmcp/components/widgets/base.dart';
+import 'package:chatmcp/dao/chat.dart';
 
 class SidebarPanel extends StatelessWidget {
   final VoidCallback? onToggle;
@@ -172,6 +173,14 @@ class ChatHistoryItem extends StatelessWidget {
                 overflow: TextOverflow.ellipsis,
               ),
             ),
+            if (!chatProvider.isSelectMode && isActive)
+              IconButton(
+                iconSize: 14,
+                padding: EdgeInsets.zero,
+                constraints: const BoxConstraints(),
+                icon: const Icon(CupertinoIcons.pencil),
+                onPressed: () => _showEditTitleDialog(context),
+              ),
           ],
         ),
         onTap: () {
@@ -183,6 +192,45 @@ class ChatHistoryItem extends StatelessWidget {
             Navigator.pop(context);
           }
         },
+      ),
+    );
+  }
+
+  void _showEditTitleDialog(BuildContext context) {
+    final TextEditingController controller =
+        TextEditingController(text: chat.title);
+
+    showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+        title: Text(AppLocalizations.of(context)!.editTitle),
+        content: TextField(
+          controller: controller,
+          decoration: InputDecoration(
+            hintText: AppLocalizations.of(context)!.enterNewTitle,
+          ),
+          autofocus: true,
+        ),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.pop(context),
+            child: Text(AppLocalizations.of(context)!.cancel),
+          ),
+          TextButton(
+            onPressed: () {
+              if (controller.text.trim().isNotEmpty) {
+                chatProvider.updateChat(Chat(
+                  id: chat.id,
+                  title: controller.text.trim(),
+                  createdAt: chat.createdAt,
+                  updatedAt: DateTime.now(),
+                ));
+                Navigator.pop(context);
+              }
+            },
+            child: Text(AppLocalizations.of(context)!.save),
+          ),
+        ],
       ),
     );
   }

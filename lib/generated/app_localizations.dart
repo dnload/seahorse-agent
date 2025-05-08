@@ -966,6 +966,18 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Reset'**
   String get reset;
+
+  /// No description provided for @editTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Edit Title'**
+  String get editTitle;
+
+  /// No description provided for @enterNewTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter new title'**
+  String get enterNewTitle;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

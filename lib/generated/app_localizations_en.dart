@@ -464,4 +464,10 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get reset => 'Reset';
+
+  @override
+  String get editTitle => 'Edit Title';
+
+  @override
+  String get enterNewTitle => 'Enter new title';
 }
