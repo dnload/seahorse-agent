@@ -15,7 +15,7 @@ class AppLocalizationsKo extends AppLocalizations {
   String get general => '일반';
 
   @override
-  String get providers => 'Providers';
+  String get providers => '서비스 제공자';
 
   @override
   String get mcpServer => 'MCP 서버';
@@ -155,10 +155,10 @@ class AppLocalizationsKo extends AppLocalizations {
   String get commandExample => '예: npx, uvx 또는 https://mcpserver.com';
 
   @override
-  String get argumentsExample => '공백으로 구분하여 입력, 예: -m mcp.server';
+  String get argumentsExample => '공백으로 구분하여 입력 (예: -m mcp.server)';
 
   @override
-  String get envVarsFormat => '한 줄에 하나씩, 예: KEY=VALUE';
+  String get envVarsFormat => '한 줄에 하나씩 입력 (예: KEY=VALUE)';
 
   @override
   String get cancel => '취소';
@@ -179,7 +179,7 @@ class AppLocalizationsKo extends AppLocalizations {
 
   @override
   String commandNotExist(Object command, Object path) {
-    return '\"$command\" 명령어가 존재하지 않습니다. 먼저 설치하세요.\n\n현재 PATH:\n$path';
+    return '\"$command\" 명령어가 존재하지 않습니다. 먼저 설치해주세요.\n\n현재 PATH:\n$path';
   }
 
   @override
@@ -205,7 +205,7 @@ class AppLocalizationsKo extends AppLocalizations {
   }
 
   @override
-  String get topPTooltip => 'Top P(누클리어스 샘플링)는 온도 설정의 대안입니다. 모델은 누적 확률이 P를 넘는 토큰들만 고려합니다. 일반적으로 Temperature와 Top P는 동시에 조절하지 않는 것이 좋습니다.';
+  String get topPTooltip => 'Top P(nucleus sampling)는 모델이 다음 토큰을 선택할 때 고려할 확률 분포의 범위를 제한합니다. 값이 낮을수록 더 보수적이고 일관된 출력을, 높을수록 더 다양하고 창의적인 출력을 생성합니다. 일반적으로 Temperature와 Top P는 동시에 조절하지 않는 것이 좋습니다.';
 
   @override
   String get maxTokens => '최대 토큰 수';
@@ -219,7 +219,7 @@ class AppLocalizationsKo extends AppLocalizations {
   }
 
   @override
-  String get frequencyPenaltyTooltip => '빈도 패널티는 텍스트 내에서 이미 등장한 토큰의 사용 빈도를 기준으로 새 토큰의 생성 가능성을 낮춥니다. 반복적인 문장을 줄이는 데 효과적입니다.';
+  String get frequencyPenaltyTooltip => '빈도 패널티는 텍스트 내에서 이미 등장한 단어나 구문의 반복을 줄여주는 기능입니다. 반복적인 문장을 줄이는 데 효과적입니다.';
 
   @override
   String presencePenalty(Object value) {
@@ -227,7 +227,7 @@ class AppLocalizationsKo extends AppLocalizations {
   }
 
   @override
-  String get presencePenaltyTooltip => '출현 패널티는 텍스트 내 등장 여부를 기준으로 새 토큰에 패널티를 부여하여, 새로운 주제에 대해 이야기할 확률을 높입니다.';
+  String get presencePenaltyTooltip => '출현 패널티는 새로운 주제나 아이디어를 더 자주 등장시키도록 하는 기능입니다. 대화의 다양성을 높이는 데 도움이 됩니다.';
 
   @override
   String get enterMaxTokens => '최대 토큰 수를 입력하세요';
