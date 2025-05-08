@@ -92,7 +92,7 @@ class McpServerProvider extends ChangeNotifier {
       if (data['mcpServers'] == null) {
         data['mcpServers'] = <String, dynamic>{};
       }
-      // 遍历data['mcpServers']，直接设置installed为true，
+      // Iterate through data['mcpServers'] and set installed to true
       for (var server in data['mcpServers'].entries) {
         server.value['installed'] = true;
       }
@@ -145,7 +145,7 @@ class McpServerProvider extends ChangeNotifier {
     final allServerConfig = await _loadServers();
     final serverConfig = allServerConfig['mcpServers'] as Map<String, dynamic>;
 
-    // 检查默认内存服务器是否已存在，如不存在则添加
+    // Check if default in-memory servers exist, add if not
     bool needSave = false;
     for (var server in defaultInMemoryServers) {
       if (!serverConfig.containsKey(server['name'])) {
@@ -154,12 +154,12 @@ class McpServerProvider extends ChangeNotifier {
       }
     }
 
-    // 如果有新增服务器，保存配置
+    // Save configuration if new servers were added
     if (needSave) {
       await saveServers({'mcpServers': serverConfig});
     }
 
-    // 过滤得到所有内存类型服务器
+    // Filter to get all in-memory type servers
     final servers = Map.fromEntries(serverConfig.entries
         .where((entry) => entry.value['type'] == 'inmemory'));
 
@@ -170,12 +170,12 @@ class McpServerProvider extends ChangeNotifier {
 
   Future<void> addMcpServer(Map<String, dynamic> server) async {
     final allServerConfig = await _loadServers();
-    // 创建一个新的Map，先放入新元素，再放入旧元素
+    // Create a new Map, add new element first, then add old elements
     final newServers = <String, dynamic>{};
     newServers[server['name']] = server;
-    // 添加原有的服务器配置
+    // Add existing server configurations
     newServers.addAll(allServerConfig['mcpServers'] as Map<String, dynamic>);
-    // 更新配置
+    // Update configuration
     allServerConfig['mcpServers'] = newServers;
     await saveServers(allServerConfig);
     notifyListeners();
@@ -417,9 +417,9 @@ class McpServerProvider extends ChangeNotifier {
           sseServers = servers;
         }
 
-        // 获取本地已安装的mcp服务器
+        // Get locally installed mcp servers
         final localInstalledServers = await _loadServers();
-        //遍历sseServers，如果本地已安装的mcp服务器中存在，则将sseServers中的该服务器设置为已安装
+        // Iterate through sseServers, if the server exists in local installed mcp servers, mark it as installed
         for (var server in sseServers.entries) {
           if (localInstalledServers['mcpServers'][server.key] != null) {
             server.value['installed'] = true;
