@@ -141,7 +141,7 @@ class _GeneralSettingsState extends State<GeneralSettings> {
               elevation: 0,
               color: Theme.of(context).colorScheme.surface,
               shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(11),
+                borderRadius: BorderRadius.circular(12),
                 side: BorderSide(
                   color: Theme.of(context).colorScheme.outline.withAlpha(50),
                 ),
