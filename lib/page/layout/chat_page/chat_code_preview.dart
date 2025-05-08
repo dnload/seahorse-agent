@@ -20,7 +20,7 @@ class ChatCodePreview extends StatefulWidget {
 }
 
 class _ChatCodePreviewState extends State<ChatCodePreview> {
-  double _height = 300; // 默认高度
+  double _height = 300; // Default height
   InAppWebViewController? controller;
   bool _hasError = false;
   int _retryCount = 0;
@@ -256,7 +256,7 @@ ${widget.codePreviewEvent.textContent}
                     ),
                     onLoadStop: (controller, url) async {
                       await Future.delayed(const Duration(milliseconds: 1000));
-                      // 注入并执行 JavaScript 代码
+                      // Inject and execute JavaScript code
                       await controller.evaluateJavascript(
                           source:
                               '''updateCode("${Uri.encodeComponent(widget.codePreviewEvent.textContent)}")''');

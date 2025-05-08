@@ -43,7 +43,7 @@ class _McpServerState extends State<McpServer> {
               child: Column(
                 children: [
                   const SizedBox(height: 20),
-                  // 搜索框
+                  // Search box
                   Card(
                     elevation: 0,
                     color: Theme.of(context).colorScheme.surface,
@@ -78,7 +78,7 @@ class _McpServerState extends State<McpServer> {
                   ),
                   const SizedBox(height: 16),
 
-                  // 标签选择和操作按钮
+                  // Tab selection and action buttons
                   Row(
                     children: [
                       _buildFilterChip(l10n.all),
@@ -105,7 +105,7 @@ class _McpServerState extends State<McpServer> {
                   ),
                   const SizedBox(height: 16),
 
-                  // 服务器列表
+                  // Server list
                   Expanded(
                     child: FutureBuilder<Map<String, dynamic>>(
                       future: (_selectedTab == l10n.all
