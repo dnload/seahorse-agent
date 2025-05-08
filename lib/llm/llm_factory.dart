@@ -70,7 +70,7 @@ class LLMFactoryHelper {
         });
       });
 
-      // 获取配置信息
+      // Get configuration information
       final apiKey = setting.apiKey;
       final baseUrl = setting.apiEndpoint;
 
@@ -88,14 +88,14 @@ class LLMFactoryHelper {
       Logger.root.severe(
           '디버그 - 최종 선택된 프로바이더: $provider, apiKey=${apiKey}, baseUrl=${baseUrl}');
 
-      // 创建 LLM 客户端
+      // Create LLM client
       return LLMFactory.create(provider, apiKey: apiKey, baseUrl: baseUrl);
     } catch (e, stackTrace) {
-      // 如果找不到匹配的提供商，使用默认的OpenAI
+      // If no matching provider is found, use the default OpenAI
       Logger.root.severe('디버그 - 예외 발생: $e');
       Logger.root.severe('디버그 - 스택 트레이스: $stackTrace');
-      Logger.root
-          .warning('未找到匹配的提供商配置: ${currentModel.providerId}，使用默认OpenAI配置');
+      Logger.root.warning(
+          'No matching provider configuration found: ${currentModel.providerId}, using default OpenAI configuration');
 
       var openAISetting = ProviderManager.settingsProvider.apiSettings
           .firstWhere((element) => element.providerId == "openai",
