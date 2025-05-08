@@ -106,6 +106,10 @@ class _GeneralSettingsState extends State<GeneralSettings> {
                       child: CText(text: 'English'),
                     ),
                     DropdownMenuItem(
+                      value: 'ko',
+                      child: CText(text: '한국어'),
+                    ),
+                    DropdownMenuItem(
                       value: 'zh',
                       child: CText(text: '中文'),
                     ),
