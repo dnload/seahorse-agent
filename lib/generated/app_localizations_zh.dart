@@ -327,7 +327,7 @@ class AppLocalizationsZh extends AppLocalizations {
   String get tool => '工具';
 
   @override
-  String get userCancelledToolCall => '工具执行失败';
+  String get userCancelledToolCall => '用户取消了工具调用';
 
   @override
   String get code => '代码';

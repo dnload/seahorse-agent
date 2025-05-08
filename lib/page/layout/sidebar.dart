@@ -256,9 +256,9 @@ class SidebarToolbar extends StatelessWidget {
         child: Row(
           children: [
             _buildSettingsButton(context),
-            _buildSelectModeButton(),
+            _buildSelectModeButton(context),
             if (chatProvider.isSelectMode) ...[
-              _buildSelectAllButton(),
+              _buildSelectAllButton(context),
               _buildDeleteButton(context),
             ],
           ],
@@ -268,34 +268,46 @@ class SidebarToolbar extends StatelessWidget {
   }
 
   Widget _buildSettingsButton(BuildContext context) {
-    return IconButton(
-      iconSize: 18,
-      icon: const Icon(CupertinoIcons.settings),
-      onPressed: () => _showSettingsDialog(context),
+    final l10n = AppLocalizations.of(context)!;
+    return Tooltip(
+      message: l10n.settings,
+      child: IconButton(
+        iconSize: 18,
+        icon: const Icon(CupertinoIcons.settings),
+        onPressed: () => _showSettingsDialog(context),
+      ),
     );
   }
 
-  Widget _buildSelectModeButton() {
-    return IconButton(
-      iconSize: 18,
-      icon: Icon(chatProvider.isSelectMode
-          ? CupertinoIcons.clear
-          : CupertinoIcons.trash),
-      onPressed: () {
-        if (chatProvider.isSelectMode) {
-          chatProvider.exitSelectMode();
-        } else {
-          chatProvider.enterSelectMode();
-        }
-      },
+  Widget _buildSelectModeButton(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
+    return Tooltip(
+      message: chatProvider.isSelectMode ? l10n.cancel : l10n.delete,
+      child: IconButton(
+        iconSize: 18,
+        icon: Icon(chatProvider.isSelectMode
+            ? CupertinoIcons.clear
+            : CupertinoIcons.trash),
+        onPressed: () {
+          if (chatProvider.isSelectMode) {
+            chatProvider.exitSelectMode();
+          } else {
+            chatProvider.enterSelectMode();
+          }
+        },
+      ),
     );
   }
 
-  Widget _buildSelectAllButton() {
-    return IconButton(
-      iconSize: 18,
-      icon: const Icon(CupertinoIcons.checkmark_square),
-      onPressed: () => chatProvider.toggleSelectAll(),
+  Widget _buildSelectAllButton(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
+    return Tooltip(
+      message: l10n.all,
+      child: IconButton(
+        iconSize: 18,
+        icon: const Icon(CupertinoIcons.checkmark_square),
+        onPressed: () => chatProvider.toggleSelectAll(),
+      ),
     );
   }
 

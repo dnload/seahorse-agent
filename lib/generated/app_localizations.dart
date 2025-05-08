@@ -700,7 +700,7 @@ abstract class AppLocalizations {
   /// No description provided for @userCancelledToolCall.
   ///
   /// In en, this message translates to:
-  /// **'Tool execution failed'**
+  /// **'User cancelled tool call'**
   String get userCancelledToolCall;
 
   /// No description provided for @code.

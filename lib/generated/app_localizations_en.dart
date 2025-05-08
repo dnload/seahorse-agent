@@ -327,7 +327,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get tool => 'Tool';
 
   @override
-  String get userCancelledToolCall => 'Tool execution failed';
+  String get userCancelledToolCall => 'User cancelled tool call';
 
   @override
   String get code => 'Code';

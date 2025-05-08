@@ -15,7 +15,7 @@ class AppLocalizationsKo extends AppLocalizations {
   String get general => '일반';
 
   @override
-  String get providers => '서비스 제공자';
+  String get providers => 'Providers';
 
   @override
   String get mcpServer => 'MCP 서버';
@@ -327,7 +327,7 @@ class AppLocalizationsKo extends AppLocalizations {
   String get tool => '도구';
 
   @override
-  String get userCancelledToolCall => '사용자가 도구 실행을 취소함';
+  String get userCancelledToolCall => '사용자가 도구 호출을 취소함';
 
   @override
   String get code => '코드';
